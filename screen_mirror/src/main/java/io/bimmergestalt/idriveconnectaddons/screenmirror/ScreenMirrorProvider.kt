@@ -33,9 +33,9 @@ class ScreenMirrorProvider(val handler: Handler) {
         var state = MutableLiveData(MirroringState.NOT_ALLOWED)
     }
 
-    private var outputSize = Point(100, 100)
+    private var outputSize = Point(1, 1)
     private var lastFrameTime = 0L
-    var minFrameTime = 0       // minimum time each frame should be displayed
+    var minFrameTime = 100       // minimum time each frame should be displayed
     var jpgQuality = 60         // output jpeg quality
 
     /** The surface that VirtualDisplay will render to */

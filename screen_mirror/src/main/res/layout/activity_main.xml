@@ -83,6 +83,126 @@
             android:paddingBottom="16dp"
             android:visibility="@{viewModel.mirroringState == MirroringState.WAITING}"
             android:text="@string/lbl_open_car" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/settings_vertical_margin"
+            android:text="Set any value to override that value for the default RHMIDimension" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/settings_vertical_margin"
+            android:text="Increasing paddingLeft and paddingTop moves the image towards the upper left, increasing the margin reduces the image size" />
+
+        <TextView
+            android:id="@+id/tv_versionName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/settings_vertical_margin"
+            android:text="The map must be closed and reopened to take effect" />
+
+        <!--button to hide our key board-->
+        <Button
+            android:id="@+id/hideBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Hide Key Board"
+            android:textAllCaps="false" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="rhmiWidth" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@{viewModel.origRhmiWidth}"
+                android:text="@={viewModel.rhmiWidth}" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="rhmiHeight" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@{viewModel.origRhmiHeight}"
+                android:text="@={viewModel.rhmiHeight}" />
+        </LinearLayout>
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="marginLeft" />
+        <EditText
+            android:id="@+id/marginLeft"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@{viewModel.origMarginLeft}"
+            android:text="@={viewModel.marginLeft}" />
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="marginRight" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@{viewModel.origMarginRight}"
+                android:text="@={viewModel.marginRight}" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="paddingLeft" />
+            <EditText
+                android:id="@+id/paddingLeft"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@{viewModel.origPaddingLeft}"
+                android:text="@={viewModel.paddingLeft}" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="paddingTop" />
+            <EditText
+                android:id="@+id/paddingTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@{viewModel.origPaddingTop}"
+                android:text="@={viewModel.paddingTop}" />
+        </LinearLayout>
     </LinearLayout>
 
 </layout>
