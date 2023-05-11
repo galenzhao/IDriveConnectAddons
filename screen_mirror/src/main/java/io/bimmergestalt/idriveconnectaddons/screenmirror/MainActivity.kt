@@ -7,10 +7,20 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+
 import android.app.AppOpsManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Process
+
+import android.content.pm.PackageManager
+
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import io.bimmergestalt.idriveconnectaddons.screenmirror.databinding.ActivityMainBinding
@@ -25,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppSettings.loadSettings(applicationContext)
+        AppSettings.loadSettings(this)
         setContentView(R.layout.activity_main)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -57,6 +68,7 @@ class MainActivity : AppCompatActivity() {
             // on below line checking if view is not null.
             if (view != null) {
                 AppSettings.loadSettings(applicationContext)
+                AppSettings.loadSettings(this)
                 val settingsViewer = AppSettingsViewer()
 
                 val origPaddingLeft = settingsViewer[AppSettings.KEYS.DIMENSIONS_PADDING_LEFT]
