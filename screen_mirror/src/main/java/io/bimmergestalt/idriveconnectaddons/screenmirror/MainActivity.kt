@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppSettings.loadSettings(this)
+        AppSettings.loadSettings(applicationContext)
         setContentView(R.layout.activity_main)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
             // on below line checking if view is not null.
             if (view != null) {
-                AppSettings.loadSettings(this)
+                AppSettings.loadSettings(applicationContext)
                 val settingsViewer = AppSettingsViewer()
 
                 val origPaddingLeft = settingsViewer[AppSettings.KEYS.DIMENSIONS_PADDING_LEFT]

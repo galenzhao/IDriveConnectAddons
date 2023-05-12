@@ -84,6 +84,7 @@ class CarAppService: Service() {
                     // running over bluetooth, decimate image quality
                     screenMirrorProvider.jpgQuality = 30
                 }
+                AppSettings.loadSettings(applicationContext)
                 app = CarApp(
                     iDriveConnectionStatus,
                     securityAccess,
