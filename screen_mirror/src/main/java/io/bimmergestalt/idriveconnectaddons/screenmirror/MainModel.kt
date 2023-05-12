@@ -10,31 +10,33 @@ import androidx.lifecycle.ViewModel
 import io.bimmergestalt.idriveconnectaddons.lib.LiveDataHelpers.map
 import io.bimmergestalt.idriveconnectkit.RHMIDimensions
 import androidx.lifecycle.*
+import io.bimmergestalt.idriveconnectaddons.lib.CarCapabilities
 
-class MainModel(appContext: Context, val carCapabilities: LiveData<Map<String, String>>): ViewModel() {
+class MainModel(appContext: Context, val carCapabilities: Map<String, String?>): ViewModel() {
     class Factory(val appContext: Context): ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            val carCapabilities = MutableLiveData<Map<String, String>>()
-//            val carInfo = CarInformationObserver { capabilities ->
-//                carCapabilities.postValue(capabilities)
-//            }
-//            if (carInfo.capabilities.isNotEmpty()) {
-//                carCapabilities.value = carInfo.capabilities
-//            }
+            val carCapabilities = HashMap<String, String?>()
+            val preloadedCapabilities = CarCapabilities(appContext).getCapabilities()
+            val capabilities = if (preloadedCapabilities.containsKey("hmi.display-width")) {
+                preloadedCapabilities
+            } else {
+//                carConnection.rhmi_getCapabilities("", 255).map { it.key as String to it.value as String }.toMap()
+                carCapabilities
+            }
             AppSettings.loadSettings(appContext)
-            return MainModel(appContext, carCapabilities) as T
+            return MainModel(appContext, capabilities) as T
         }
     }
-    private val origDimensions = carCapabilities.map { RHMIDimensions.create(it) }
+    private val origDimensions = RHMIDimensions.create(carCapabilities)
 
     val settingsViewer = AppSettingsViewer()
-    val origRhmiWidth = "980"
-    val origRhmiHeight = "540"
-    val origMarginLeft = "90"
-    val origMarginRight = "5"
-    val origPaddingLeft = "90"
-    val origPaddingTop = "67"
+    val origRhmiWidth = ""+origDimensions.rhmiWidth
+    val origRhmiHeight = ""+origDimensions.rhmiHeight
+    val origMarginLeft = ""+origDimensions.marginLeft
+    val origMarginRight = ""+origDimensions.marginRight
+    val origPaddingLeft = ""+origDimensions.paddingLeft
+    val origPaddingTop = ""+origDimensions.paddingTop
 
     val rhmiWidth = StringLiveSetting(appContext, AppSettings.KEYS.DIMENSIONS_RHMI_WIDTH)
     val rhmiHeight = StringLiveSetting(appContext, AppSettings.KEYS.DIMENSIONS_RHMI_HEIGHT)
