@@ -48,14 +48,17 @@ class CarApp(val iDriveConnectionStatus: IDriveConnectionStatus, securityAccess:
         }
         rhmiDimensions = RHMIDimensions.create(capabilities)
         val centeredWidth = rhmiDimensions.rhmiWidth - 2 * (rhmiDimensions.marginLeft)
-        screenMirrorProvider.setSize(centeredWidth, rhmiDimensions.visibleHeight)
+
+        val appSettings = AppSettingsViewer()
+        val dimensions = CustomRHMIDimensions(rhmiDimensions, appSettings)
+        screenMirrorProvider.setSize(dimensions.rhmiWidth, dimensions.rhmiHeight)
 
         createAmApp()
 
         createCdsSubscription()
 
         carApp = createRhmiApp()
-        stateImage = ImageState(carApp.states.values.first {ImageState.fits(it)}, screenMirrorProvider, rhmiDimensions)
+        stateImage = ImageState(carApp.states.values.first {ImageState.fits(it)}, screenMirrorProvider, dimensions)
 
         initWidgets()
         Log.i(TAG, "CarApp running")

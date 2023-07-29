@@ -26,13 +26,19 @@ class ImageState(val state: RHMIState, val screenMirrorProvider: ScreenMirrorPro
         state.setProperty(RHMIProperty.PropertyId.HMISTATE_TABLETYPE, 3)
         state.setProperty(RHMIProperty.PropertyId.HMISTATE_TABLELAYOUT, "1,0,7")
         state.getTextModel()?.asRaDataModel()?.value = L.MIRRORING_TITLE
-        image.setProperty(RHMIProperty.PropertyId.WIDTH, rhmiDimensions.visibleWidth)
-        image.setProperty(RHMIProperty.PropertyId.HEIGHT, rhmiDimensions.visibleHeight)
-        image.setProperty(RHMIProperty.PropertyId.POSITION_X, -rhmiDimensions.paddingLeft)
-        image.setProperty(RHMIProperty.PropertyId.POSITION_Y, -rhmiDimensions.paddingTop)
+        image.setProperty(RHMIProperty.PropertyId.WIDTH, rhmiDimensions.rhmiWidth)
+        image.setProperty(RHMIProperty.PropertyId.HEIGHT, rhmiDimensions.rhmiHeight)
+
+        image.setProperty(RHMIProperty.PropertyId.POSITION_X,0-rhmiDimensions.paddingLeft)
+        image.setProperty(RHMIProperty.PropertyId.POSITION_Y,0-rhmiDimensions.paddingTop)
+
         infoList.setProperty(RHMIProperty.PropertyId.LIST_COLUMNWIDTH, "*")
         infoList.getModel()?.value = RHMIModel.RaListModel.RHMIListConcrete(1).also {
             it.addRow(arrayOf("${L.PERMISSION_PROMPT}\n"))
+            it.addRow(arrayOf("rhmiWidth: "+rhmiDimensions.rhmiWidth))
+            it.addRow(arrayOf("rhmiHeight: "+rhmiDimensions.rhmiHeight))
+            it.addRow(arrayOf("paddingLeft: "+rhmiDimensions.paddingLeft))
+            it.addRow(arrayOf("paddingTop: "+rhmiDimensions.paddingTop))
         }
         showPermissionPrompt()
 
