@@ -53,7 +53,6 @@ class CarApp(val iDriveConnectionStatus: IDriveConnectionStatus, securityAccess:
         val appSettings = AppSettingsViewer()
         val dimensions = CustomRHMIDimensions(rhmiDimensions, appSettings)
         screenMirrorProvider.setSize(dimensions.rhmiWidth, dimensions.rhmiHeight)
-
         createAmApp()
 
         createCdsSubscription()
