@@ -7,8 +7,10 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.viewModels
+import android.app.AppOpsManager
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Process
+import androidx.activity.viewModels
 import io.bimmergestalt.idriveconnectaddons.screenmirror.databinding.ActivityMainBinding
 
 
@@ -72,4 +74,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        println("PROJECT_MEDIA permission: ${checkSelfPermission("PROJECT_MEDIA")}")
+        val appOps = getSystemService(AppOpsManager::class.java)
+        println("PROJECT_MEDIA appops: ${appOps.checkOpNoThrow("android:project_media", Process.myUid(), packageName)}")
+    }
 }
