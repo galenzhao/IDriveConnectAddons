@@ -12,6 +12,13 @@ class MainController(val activity: Activity) {
 
     companion object {
         const val REQUEST_POST_NOTIFICATIONS = 60
+class MainController(val context: Context) {
+    fun promptPermission(fromBackground: Boolean) {
+        val intent = Intent(context, RequestActivity::class.java)
+        if (fromBackground) {
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        context.startActivity(intent)
     }
 
     private fun tryOpenActivity(intent: Intent): Boolean {
