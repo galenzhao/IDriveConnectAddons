@@ -22,7 +22,10 @@ import android.widget.TextView
 import android.widget.Toast
 
 import androidx.activity.viewModels
+import android.app.AppOpsManager
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Process
+import androidx.activity.viewModels
 import io.bimmergestalt.idriveconnectaddons.screenmirror.databinding.ActivityMainBinding
 
 
