@@ -24,9 +24,15 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import android.app.AppOpsManager
 import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Process
+import android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION
+import android.provider.Settings.canDrawOverlays
 import androidx.activity.viewModels
 import io.bimmergestalt.idriveconnectaddons.screenmirror.databinding.ActivityMainBinding
+import androidx.annotation.Nullable;
+
 
 
 const val TAG = "ScreenMirroring"
@@ -35,10 +41,13 @@ class MainActivity : AppCompatActivity() {
     val controller by lazy { MainController(this) }
     val viewModel by viewModels<MainModel>{ MainModel.Factory(this.applicationContext) }
 
+    private val REQUEST_PERMISSION_CODE = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppSettings.loadSettings(applicationContext)
         AppSettings.loadSettings(this)
+
         setContentView(R.layout.activity_main)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -70,8 +79,10 @@ class MainActivity : AppCompatActivity() {
 
             // on below line checking if view is not null.
             if (view != null) {
+
                 AppSettings.loadSettings(applicationContext)
                 AppSettings.loadSettings(this)
+
                 val settingsViewer = AppSettingsViewer()
 
                 val origPaddingLeft = settingsViewer[AppSettings.KEYS.DIMENSIONS_PADDING_LEFT]
@@ -97,5 +108,33 @@ class MainActivity : AppCompatActivity() {
         println("PROJECT_MEDIA permission: ${checkSelfPermission("PROJECT_MEDIA")}")
         val appOps = getSystemService(AppOpsManager::class.java)
         println("PROJECT_MEDIA appops: ${appOps.checkOpNoThrow("android:project_media", Process.myUid(), packageName)}")
+
+        if(canDrawOverlays(this)){
+
+        }else{
+            requestPermission()
+        }
+    }
+
+    private fun requestPermission() {
+        val uri = Uri.parse("package:$packageName")
+        val intent = Intent(ACTION_MANAGE_OVERLAY_PERMISSION, uri)
+        startActivityForResult(intent, REQUEST_PERMISSION_CODE)
+    }
+
+    fun isGranted(): Boolean {
+        return canDrawOverlays(this)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, @Nullable data: Intent?) {
+        if (requestCode == REQUEST_PERMISSION_CODE) {
+            if (canDrawOverlays(this)) {
+                // 許可されたときの処理
+            } else {
+                // 拒否されたときの処理
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 }
