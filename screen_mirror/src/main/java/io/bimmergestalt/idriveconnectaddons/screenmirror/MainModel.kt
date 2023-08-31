@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import io.bimmergestalt.idriveconnectaddons.lib.LiveDataHelpers.map
 import io.bimmergestalt.idriveconnectkit.RHMIDimensions
 import androidx.lifecycle.*
+
 import io.bimmergestalt.idriveconnectaddons.lib.CarCapabilities
 
 class MainModel(appContext: Context, val carCapabilities: Map<String, String?>): ViewModel() {

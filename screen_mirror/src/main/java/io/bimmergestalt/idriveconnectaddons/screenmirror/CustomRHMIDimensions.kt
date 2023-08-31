@@ -15,6 +15,7 @@ class CustomRHMIDimensions(val original: RHMIDimensions, val settingsViewer: App
 		get() = settingsViewer[AppSettings.KEYS.DIMENSIONS_PADDING_TOP].toIntOrNull() ?: original.paddingTop
 	override val marginRight: Int
 		get() = settingsViewer[AppSettings.KEYS.DIMENSIONS_MARGIN_RIGHT].toIntOrNull() ?: original.marginRight
+
 }
 class UpdatingSidebarRHMIDimensions(val fullscreen: RHMIDimensions, val isWidescreen: () -> Boolean):
 		RHMIDimensions {
