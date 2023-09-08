@@ -41,6 +41,7 @@ class MainModel(appContext: Context, val carCapabilities: Map<String, String?>):
     val marginRight = StringLiveSetting(appContext, AppSettings.KEYS.DIMENSIONS_MARGIN_RIGHT)
     val paddingLeft = StringLiveSetting(appContext, AppSettings.KEYS.DIMENSIONS_PADDING_LEFT)
     val paddingTop = StringLiveSetting(appContext, AppSettings.KEYS.DIMENSIONS_PADDING_TOP)
+    val autopermission = StringLiveSetting(appContext, AppSettings.KEYS.AUTO_PERMISSION)
 
     val mirroringState = ScreenMirrorProvider.state
     val mirroringStateText: LiveData<Context.() -> String> = ScreenMirrorProvider.state.map({getString(R.string.lbl_status_not_ready)}) {
