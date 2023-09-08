@@ -45,6 +45,7 @@ class MainModel(appContext: Context, val carCapabilities: Map<String, String?>):
     val marginRight = StringLiveSetting(appContext, AppSettings.KEYS.DIMENSIONS_MARGIN_RIGHT)
     val paddingLeft = StringLiveSetting(appContext, AppSettings.KEYS.DIMENSIONS_PADDING_LEFT)
     val paddingTop = StringLiveSetting(appContext, AppSettings.KEYS.DIMENSIONS_PADDING_TOP)
+    val autopermission = StringLiveSetting(appContext, AppSettings.KEYS.AUTO_PERMISSION)
 
 class MainModel: ViewModel() {
     val notificationPermission = MutableLiveData(false)

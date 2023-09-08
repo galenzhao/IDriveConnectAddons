@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
         }
-        findViewById<TextView>(R.id.tv_versionName).setText(myVersionName)
+        findViewById<TextView>(R.id.tv_versionName).text = myVersionName
 
         // on below line adding click listener for button.
         findViewById<Button>(R.id.hideBtn).setOnClickListener {
@@ -94,10 +94,22 @@ class MainActivity : AppCompatActivity() {
                     this.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
 
                 // on below line hiding our keyboard.
-                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0)
+                inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 
-                // displaying toast message on below line.
-                Toast.makeText(this, "Key board hidden: $origPaddingLeft, $origPaddingTop", Toast.LENGTH_SHORT).show()
+            }
+            AppSettings.loadSettings(applicationContext)
+
+            val settingsViewer = AppSettingsViewer()
+
+            val origPaddingLeft = settingsViewer[AppSettings.KEYS.DIMENSIONS_PADDING_LEFT]
+            val origPaddingTop = settingsViewer[AppSettings.KEYS.DIMENSIONS_PADDING_TOP]
+            // displaying toast message on below line.
+            Toast.makeText(this, "Key board hidden: $origPaddingLeft, $origPaddingTop", Toast.LENGTH_SHORT).show()
+
+            if (isGranted()){
+
+            }else {
+                requestPermission()
             }
         }
     }
@@ -110,9 +122,19 @@ class MainActivity : AppCompatActivity() {
         println("PROJECT_MEDIA appops: ${appOps.checkOpNoThrow("android:project_media", Process.myUid(), packageName)}")
 
         if(canDrawOverlays(this)){
+            if(getString(R.string.lbl_status_not_allowed).equals(findViewById<TextView>(R.id.mirroringStateText).text.toString(),true)) {
+                println("PROJECT_MEDIA permission: ${checkSelfPermission("PROJECT_MEDIA")}")
+                AppSettings.loadSettings(applicationContext)
 
+                val settingsViewer = AppSettingsViewer()
+                if (settingsViewer[AppSettings.KEYS.AUTO_PERMISSION].isNotEmpty() && settingsViewer[AppSettings.KEYS.AUTO_PERMISSION].toInt() > 0) {
+                    val appOps = getSystemService(AppOpsManager::class.java)
+                    println("PROJECT_MEDIA appops: ${appOps.checkOpNoThrow("android:project_media", Process.myUid(), packageName)}")
+                    controller.promptPermission(false)
+                }
+            }
         }else{
-            requestPermission()
+
         }
     }
 
@@ -122,7 +144,7 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(intent, REQUEST_PERMISSION_CODE)
     }
 
-    fun isGranted(): Boolean {
+    private fun isGranted(): Boolean {
         return canDrawOverlays(this)
     }
 
