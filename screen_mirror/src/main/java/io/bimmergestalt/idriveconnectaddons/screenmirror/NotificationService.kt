@@ -25,7 +25,7 @@ class NotificationService: Service() {
         val ONGOING_NOTIFICATION_ID = 53457         // foreground ongoing notification
         val PERMISSION_CHANNEL_ID = "PermissionNotification"
         val ONGOING_CHANNEL_ID = "ConnectionNotification"
-        val TIMEOUT = 60000L
+        val TIMEOUT = 2*60*1000L
 
         val INTENT_EXTRA_FOREGROUND = "foreground"
 

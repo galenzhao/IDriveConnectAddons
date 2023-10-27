@@ -194,11 +194,13 @@ class CarApp(val iDriveConnectionStatus: IDriveConnectionStatus, securityAccess:
                 val speed = data.optDouble("speedActual", 0.0)
                 val moving = speed > 0
                 val carMode = uiModeManager.currentModeType == Configuration.UI_MODE_TYPE_CAR
-                if (moving && !carMode) {
-                    screenMirrorProvider.minFrameTime = 1000
-                } else {
-                    screenMirrorProvider.minFrameTime = 0
-                }
+//                if (moving && !carMode) {
+//                    screenMirrorProvider.minFrameTime = 1000
+//                } else {
+//                    screenMirrorProvider.minFrameTime = 0
+//                }
+                val appSettings = AppSettingsViewer()
+                screenMirrorProvider.minFrameTime = appSettings[AppSettings.KEYS.MINFRAMETIME].toInt();
             }
         }
     }

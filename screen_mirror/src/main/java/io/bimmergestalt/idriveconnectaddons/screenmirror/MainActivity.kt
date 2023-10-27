@@ -142,24 +142,33 @@ class MainActivity : AppCompatActivity() {
 
             if (isGranted()){
 
-            }else {
-                requestPermission()
-            }
-        }
-        // Sets up notification channel.
-        createNotificationChannel()
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        "android.permission.POST_NOTIFICATIONS",
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    showDummyNotification()
+                } else {
+                    // Sets up notification channel.
+                    createNotificationChannel()
 
-        // Sets up permissions request launcher.
-        requestPermissionLauncher = registerForActivityResult(RequestPermission()) {
+                    // Sets up permissions request launcher.
+                    requestPermissionLauncher = registerForActivityResult(RequestPermission()) {
 //            refreshUI()
-            if (it) {
-                showDummyNotification()
-            } else {
+                        if (it) {
+                            showDummyNotification()
+                        } else {
 //                Snackbar.make(
 //                    findViewById<View>(android.R.id.content).rootView,
 //                    "Please grant Notification permission from App Settings",
 //                    Snackbar.LENGTH_LONG
 //                ).show()
+                        }
+                    }
+                    requestPermissionLauncher.launch("android.permission.POST_NOTIFICATIONS")
+                }
+            }else {
+                requestPermission()
             }
         }
     }
@@ -188,15 +197,6 @@ class MainActivity : AppCompatActivity() {
         println("PROJECT_MEDIA appops: ${appOps.checkOpNoThrow("android:project_media", Process.myUid(), packageName)}")
 
         if(canDrawOverlays(this)){
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    "android.permission.POST_NOTIFICATIONS",
-                ) == PackageManager.PERMISSION_GRANTED
-            ) {
-                showDummyNotification()
-            } else {
-                requestPermissionLauncher.launch("android.permission.POST_NOTIFICATIONS")
-            }
             if(getString(R.string.lbl_status_not_allowed).equals(findViewById<TextView>(R.id.mirroringStateText).text.toString(),true)) {
                 println("PROJECT_MEDIA permission: ${checkSelfPermission("PROJECT_MEDIA")}")
                 AppSettings.loadSettings(applicationContext)
