@@ -35,7 +35,7 @@ class ScreenMirrorProvider(val handler: Handler) {
 
     private var outputSize = Point(1, 1)
     private var lastFrameTime = 0L
-    var minFrameTime = 100       // minimum time each frame should be displayed
+    var minFrameTime = 1000*10       // minimum time each frame should be displayed
     var jpgQuality = 60         // output jpeg quality
 
     /** The surface that VirtualDisplay will render to */

@@ -24,7 +24,8 @@ interface AppSettings {
 		DIMENSIONS_MARGIN_RIGHT("Dimensions_Margin_Right", "", "Force RHMIDimensions to a specific marginRight"),
 		DIMENSIONS_PADDING_LEFT("Dimensions_Padding_Left", "", "Force RHMIDimensions to a specific paddingLeft"),
 		DIMENSIONS_PADDING_TOP("Dimensions_Padding_Top", "", "Force RHMIDimensions to a specific paddingTop"),
-		AUTO_PERMISSION("AUTO_PERMISSION","",",")
+		AUTO_PERMISSION("AUTO_PERMISSION","",","),
+		MINFRAMETIME("minFrameTime","1000","")
 	}
 
 	/** Store the active preferences in a singleton */
