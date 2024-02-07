@@ -201,6 +201,7 @@ class CarApp(val iDriveConnectionStatus: IDriveConnectionStatus, securityAccess:
 //                }
                 val appSettings = AppSettingsViewer()
                 screenMirrorProvider.minFrameTime = appSettings[AppSettings.KEYS.MINFRAMETIME].toInt();
+                screenMirrorProvider.jpgQuality = appSettings[AppSettings.KEYS.jpgQuality].toInt();
             }
         }
     }
