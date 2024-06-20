@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/androbd_gestalt" />
+            <option value="$PROJECT_DIR$/androbd_gestalt/AndrOBD-libplugin" />
+            <option value="$PROJECT_DIR$/bimmerscrobbler" />
+            <option value="$PROJECT_DIR$/cds_details" />
+            <option value="$PROJECT_DIR$/cds_gauges" />
+            <option value="$PROJECT_DIR$/lib" />
+            <option value="$PROJECT_DIR$/screen_mirror" />
+          </set>
+        </option>
+        <option name="resolveExternalAnnotations" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

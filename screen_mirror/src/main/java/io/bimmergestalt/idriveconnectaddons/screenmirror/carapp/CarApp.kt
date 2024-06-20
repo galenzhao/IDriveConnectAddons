@@ -47,6 +47,7 @@ class CarApp(val iDriveConnectionStatus: IDriveConnectionStatus, securityAccess:
             carConnection.rhmi_getCapabilities("", 255).map { it.key as String to it.value as String }.toMap()
         }
         rhmiDimensions = RHMIDimensions.create(capabilities)
+        
         val centeredWidth = rhmiDimensions.rhmiWidth - 2 * (rhmiDimensions.marginLeft)
 
         val appSettings = AppSettingsViewer()

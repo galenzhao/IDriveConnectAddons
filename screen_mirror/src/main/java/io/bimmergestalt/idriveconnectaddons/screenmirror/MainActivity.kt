@@ -5,21 +5,19 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Process
 
-
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 
-import androidx.activity.viewModels
 import android.app.AppOpsManager
+
+import androidx.activity.viewModels
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION
 import android.provider.Settings.canDrawOverlays
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import io.bimmergestalt.idriveconnectaddons.screenmirror.databinding.ActivityMainBinding
 import androidx.annotation.Nullable;
 import android.Manifest
@@ -32,12 +30,13 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import android.content.Context
 import android.os.Build
-import androidx.annotation.RequiresApi
 
+import androidx.activity.ComponentActivity
+import androidx.annotation.RequiresApi
 
 const val TAG = "ScreenMirroring"
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
     val controller by lazy { MainController(this) }
     val viewModel by viewModels<MainModel>{ MainModel.Factory(this.applicationContext) }
 
@@ -116,6 +115,7 @@ class MainActivity : AppCompatActivity() {
 
                 // displaying toast message on below line.
                 Toast.makeText(this, "Key board hidden: $origPaddingLeft, $origPaddingTop", Toast.LENGTH_SHORT).show()
+                // on below line hiding our keyboard.
                 inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 
             }
@@ -179,6 +179,10 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
+        viewModel.updatePermissions(this)
+        println("PROJECT_MEDIA permission: ${checkSelfPermission("PROJECT_MEDIA")}")
+        val appOps = getSystemService(AppOpsManager::class.java)
+        println("PROJECT_MEDIA appops: ${appOps.checkOpNoThrow("android:project_media", Process.myUid(), packageName)}")
 
         if(canDrawOverlays(this)){
             if(getString(R.string.lbl_status_not_allowed).equals(findViewById<TextView>(R.id.mirroringStateText).text.toString(),true)) {
@@ -189,7 +193,7 @@ class MainActivity : AppCompatActivity() {
                 if (settingsViewer[AppSettings.KEYS.AUTO_PERMISSION].isNotEmpty() && settingsViewer[AppSettings.KEYS.AUTO_PERMISSION].toInt() > 100) {
                     val appOps = getSystemService(AppOpsManager::class.java)
                     println("PROJECT_MEDIA appops: ${appOps.checkOpNoThrow("android:project_media", Process.myUid(), packageName)}")
-                    controller.promptPermission(false)
+                    controller.promptMirroringPermission()
                 }
             }
         }else{
