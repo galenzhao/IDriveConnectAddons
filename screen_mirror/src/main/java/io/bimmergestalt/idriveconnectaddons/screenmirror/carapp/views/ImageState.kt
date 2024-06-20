@@ -26,11 +26,12 @@ class ImageState(val state: RHMIState, val screenMirrorProvider: ScreenMirrorPro
         state.setProperty(RHMIProperty.PropertyId.HMISTATE_TABLETYPE, 3)
         state.setProperty(RHMIProperty.PropertyId.HMISTATE_TABLELAYOUT, "1,0,7")
         state.getTextModel()?.asRaDataModel()?.value = L.MIRRORING_TITLE
-        image.setProperty(RHMIProperty.PropertyId.WIDTH, rhmiDimensions.rhmiWidth)
-        image.setProperty(RHMIProperty.PropertyId.HEIGHT, rhmiDimensions.rhmiHeight)
 
-        image.setProperty(RHMIProperty.PropertyId.POSITION_X,0-rhmiDimensions.paddingLeft)
-        image.setProperty(RHMIProperty.PropertyId.POSITION_Y,0-rhmiDimensions.paddingTop)
+        image.setProperty(RHMIProperty.PropertyId.WIDTH, rhmiDimensions.rhmiWidth) //970
+        image.setProperty(RHMIProperty.PropertyId.HEIGHT, rhmiDimensions.rhmiHeight) //600
+
+        image.setProperty(RHMIProperty.PropertyId.POSITION_X,0-rhmiDimensions.paddingLeft) //180
+        image.setProperty(RHMIProperty.PropertyId.POSITION_Y,0-rhmiDimensions.paddingTop) //67
 
         infoList.setProperty(RHMIProperty.PropertyId.LIST_COLUMNWIDTH, "*")
         infoList.getModel()?.value = RHMIModel.RaListModel.RHMIListConcrete(1).also {

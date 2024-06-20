@@ -11,6 +11,9 @@
             name="viewModel"
             type="io.bimmergestalt.idriveconnectaddons.screenmirror.MainModel" />
     </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,6 +40,7 @@
                 android:text="@string/lbl_status" />
 
             <TextView
+                android:id="@+id/mirroringStateText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -49,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:onClick="@{() -> controller.promptPermission()}"
+            android:onClick="@{() -> controller.promptPermission(false)}"
             android:visibility="@{viewModel.mirroringState == MirroringState.NOT_ALLOWED}"
             android:text="@string/btn_grant_auth"/>
 
@@ -128,7 +132,7 @@
             android:id="@+id/marginLeft"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:hint="@{viewModel.origMarginLeft}"
             android:text="@={viewModel.marginLeft}" />
     </LinearLayout>
@@ -139,11 +143,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="marginRight" />
+                android:text="#!marginRight" />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:inputType="numberSigned"
                 android:hint="@{viewModel.origMarginRight}"
                 android:text="@={viewModel.marginRight}" />
         </LinearLayout>
@@ -159,7 +163,7 @@
                 android:id="@+id/paddingLeft"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:inputType="numberSigned"
                 android:hint="@{viewModel.origPaddingLeft}"
                 android:text="@={viewModel.paddingLeft}" />
         </LinearLayout>
@@ -175,10 +179,57 @@
                 android:id="@+id/paddingTop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:inputType="numberSigned"
                 android:hint="@{viewModel.origPaddingTop}"
                 android:text="@={viewModel.paddingTop}" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="auto permission" />
+            <EditText
+                android:id="@+id/autopermission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint=""
+                android:text="@={viewModel.autopermission}" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="jpgQuality" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint=""
+                android:text="@={viewModel.jpgQuality}" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="minFrameTime" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint=""
+                android:text="@={viewModel.minFrameTime}" />
+        </LinearLayout>
     </LinearLayout>
 
+    </ScrollView>
 </layout>
