@@ -23,7 +23,6 @@ import android.widget.Toast
 
 import androidx.activity.viewModels
 import android.app.AppOpsManager
-import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.net.Uri
 import android.os.Process
