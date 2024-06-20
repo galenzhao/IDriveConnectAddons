@@ -132,7 +132,7 @@ class CarAppService: Service() {
 
                                 wl.release()
                             } else if (settingsViewer[AppSettings.KEYS.AUTO_PERMISSION].toInt()%100 == 21) {
-                                MainController(applicationContext).promptPermission(true)
+//                                MainController(applicationContext).promptPermission(true)
                             }else if (settingsViewer[AppSettings.KEYS.AUTO_PERMISSION].toInt()%100 == 31) {
                                 val fullScreenIntent = Intent(applicationContext, RequestActivity::class.java)
                                 val fullScreenPendingIntent = PendingIntent.getActivity(

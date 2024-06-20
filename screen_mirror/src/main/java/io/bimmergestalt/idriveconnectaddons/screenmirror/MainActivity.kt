@@ -10,22 +10,11 @@ import android.widget.Toast
 
 import android.app.AppOpsManager
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.os.Process
-
-import android.content.pm.PackageManager
-
-import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
 
 import androidx.activity.viewModels
-import android.app.AppOpsManager
 import android.content.Intent
 import android.net.Uri
-import android.os.Process
 import android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION
 import android.provider.Settings.canDrawOverlays
 import androidx.activity.viewModels
@@ -41,11 +30,12 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import android.content.Context
 import android.os.Build
+import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
 
 const val TAG = "ScreenMirroring"
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
     val controller by lazy { MainController(this) }
     val viewModel by viewModels<MainModel>{ MainModel.Factory(this.applicationContext) }
 
@@ -204,7 +194,7 @@ class MainActivity : AppCompatActivity() {
                 if (settingsViewer[AppSettings.KEYS.AUTO_PERMISSION].isNotEmpty() && settingsViewer[AppSettings.KEYS.AUTO_PERMISSION].toInt() > 100) {
                     val appOps = getSystemService(AppOpsManager::class.java)
                     println("PROJECT_MEDIA appops: ${appOps.checkOpNoThrow("android:project_media", Process.myUid(), packageName)}")
-                    controller.promptPermission(false)
+                    controller.promptMirroringPermission()
                 }
             }
         }else{

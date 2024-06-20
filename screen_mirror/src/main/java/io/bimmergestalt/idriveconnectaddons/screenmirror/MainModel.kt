@@ -49,7 +49,6 @@ class MainModel(appContext: Context, val carCapabilities: Map<String, String?>):
     val minFrameTime = StringLiveSetting(appContext, AppSettings.KEYS.MINFRAMETIME)
     val jpgQuality = StringLiveSetting(appContext, AppSettings.KEYS.jpgQuality)
 
-class MainModel: ViewModel() {
     val notificationPermission = MutableLiveData(false)
     val mirroringState = ScreenMirrorProvider.state
     val mirroringStateText: LiveData<Context.() -> String> = ScreenMirrorProvider.state.map({getString(R.string.lbl_status_not_ready)}) {
@@ -73,4 +72,4 @@ class MainModel: ViewModel() {
         notificationPermission.value = Build.VERSION.SDK_INT < 33
                 || context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED
     }
-}
+    }

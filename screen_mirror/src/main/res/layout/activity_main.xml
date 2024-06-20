@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:onClick="@{() -> controller.promptMirroringPermission()}"
-            android:onClick="@{() -> controller.promptPermission(false)}"
+
             android:visibility="@{viewModel.mirroringState == MirroringState.NOT_ALLOWED}"
             android:text="@string/btn_grant_mirror_auth"/>
 
